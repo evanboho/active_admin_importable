@@ -3,7 +3,11 @@ module ActiveAdminImportable
 
     def active_admin_importable
       action_item :only => :index do
-        link_to "Import #{active_admin_config.resource_name.to_s.pluralize}", :action => 'import'
+        link_to "Import #{active_admin_config.resource_name.to_s.pluralize.downcase}", :action => 'import'
+      end
+
+      action_item :only => :index do
+        link_to "Import #{active_admin_config.resource_name.to_s.pluralize.downcase}", :action => 'import'
       end
 
       collection_action :import, :method => :get do

@@ -14,4 +14,6 @@ Gem::Specification.new do |gem|
   gem.name          = "active_admin_importable"
   gem.require_paths = ["lib"]
   gem.version       = ActiveAdminImportable::VERSION
+
+  #gem.dependencies = ['activeadmin']
 end
