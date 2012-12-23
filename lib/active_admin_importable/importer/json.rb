@@ -4,6 +4,8 @@ module ActiveAdminImportable
 
       def self.parse file
 
+        json = JSON.decode file.read
+
         binding.pry
 
       end

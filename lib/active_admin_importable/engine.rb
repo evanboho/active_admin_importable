@@ -1,4 +1,3 @@
-require 'active_admin_importable'
 require 'rails'
 
 module ActiveAdminImportable
