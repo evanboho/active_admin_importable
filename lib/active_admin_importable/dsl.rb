@@ -37,7 +37,7 @@ module ActiveAdminImportable
 
         unless result[:failed] == 0
           to_notify = ["Failed to import #{result[:failed]} #{active_admin_config.resource_name.downcase.send(result[:failed] == 1 ? 'to_s' : 'pluralize')}", result[:errors]]
-          to_notify.flatten.join(' : ')
+          to_notify.join(' : ')
           flash[:error] = to_notify
         end
         redirect_to :back
