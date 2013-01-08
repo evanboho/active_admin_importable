@@ -37,7 +37,7 @@ module ActiveAdminImportable
 
         unless result[:failed] == 0
           flash[:error] = ["Failed to import#{result[:failed]} #{active_admin_config.resource_name.downcase.send(result[:failed] == 1 ? 'to_s' : 'pluralize')}"]
-          result[:messages].each do |message|
+          result[:errors].each do |message|
             flash[:error] << message
           end
         end
