@@ -40,6 +40,7 @@ module ActiveAdminImportable
           result[:messages].each do |message|
             flash[:error] << message
           end
+        end
         redirect_to :back
       end
 
