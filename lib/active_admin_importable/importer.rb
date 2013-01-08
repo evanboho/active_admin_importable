@@ -36,12 +36,12 @@ module ActiveAdminImportable
           row[attribute] = value
         end
 
-        new_resource = resource.new row
+        new_resource = resource.new(row)
         if new_resource.valid? && new_resource.save
           result[:imported] += 1
-        elsif new_resource.errors?
+        elsif !new_resource.errors.messages.blank?
           result[:failed] += 1
-          l.errors.messages.each do |k,v|
+          new_resource.errors.messages.each do |k,v|
             v.each do |em|
               result[:errors] << em
             end
