@@ -28,7 +28,7 @@ module ActiveAdminImportable
         line.each_with_index do |value, cell_index|
           attribute = data[:header][cell_index]
 
-          if attribute.in?(restricted_attributes) || !attribute.in?(attributes) || !attribute.in?(attr_accessible)
+          if attribute.in?(restricted_attributes) || !attribute.in?(attr_accessible) # || !attribute.in?(attributes)
             next
           end
 
