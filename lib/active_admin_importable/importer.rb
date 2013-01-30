@@ -32,7 +32,7 @@ module ActiveAdminImportable
             next
           end
 
-          if value && [:date, :datetime].include?(resource.columns_hash[attribute].type)
+          if value && [:date, :datetime].include?(resource.columns_hash[attribute].try(:type))
             row[attribute] = options[:date_format] ? Date.strptime(value, options[:date_format]) : Chronic.parse(value)
           else
             row[attribute] = value
