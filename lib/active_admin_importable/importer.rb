@@ -25,13 +25,17 @@ module ActiveAdminImportable
       data[:data].each_with_index do |line, line_index|
         row = {}
 
+        options[:lower_limit] ||= 0
+        options[:upper_limit] ||= data[:data].count
+        if line_index < options[:lower_limit] || line_index > options[:upper_limit]
+          next
+        end
+
         line.each_with_index do |value, cell_index|
           attribute = data[:header][cell_index]
 
-          options[:lower_limit] ||= 0
-          options[:upper_limit] ||= data[:data].count
 
-          if !attribute.in?(attr_accessible) || line_index < options[:lower_limit] || line_index > options[:upper_limit]
+          if !attribute.in?(attr_accessible)
             next
           end
 
