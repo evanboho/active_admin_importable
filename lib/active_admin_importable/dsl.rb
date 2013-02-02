@@ -1,7 +1,7 @@
 module ActiveAdminImportable
   module DSL
 
-    def active_admin_importable(date_format=nil)
+    def active_admin_importable
       action_item :only => :index do
         link_to "Import #{active_admin_config.resource_name.to_s.pluralize.downcase}", :action => 'import'
       end
@@ -31,7 +31,7 @@ module ActiveAdminImportable
           redirect_to :back
         end
 
-        result = Importer.import extension, active_admin_config.resource_name, params[:import][:file], :date_format => date_format
+        result = Importer.import extension, active_admin_config.resource_name, params[:import][:file]
 
         flash[:notice] = "Imported #{result[:imported]} #{active_admin_config.resource_name.downcase.send(result[:imported] == 1 ? 'to_s' : 'pluralize')}"
 
