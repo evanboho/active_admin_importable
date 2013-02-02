@@ -15,7 +15,7 @@ module ActiveAdminImportable
         end
 
       if data[:header]
-        data[:header].map! { |el| el.underscore.gsub(/\s+/, '_') }
+        data[:header].map! { |el| el.underscore.gsub(/\s+/, '_') unless el.nil? }
       end
 
       attributes = resource.attribute_names
@@ -28,15 +28,15 @@ module ActiveAdminImportable
         line.each_with_index do |value, cell_index|
           attribute = data[:header][cell_index]
 
-          if attribute.in?(restricted_attributes) || !attribute.in?(attr_accessible) # || !attribute.in?(attributes)
+          options[:lower_limit] ||= 0
+          options[:upper_limit] ||= data[:data].count
+
+          if !attribute.in?(attr_accessible) || line_index < options[:lower_limit] || line_index > options[:upper_limit]
             next
           end
 
-          if value && [:date, :datetime].include?(resource.columns_hash[attribute].try(:type))
-            row[attribute] = options[:date_format] ? Date.strptime(value, options[:date_format]) : Chronic.parse(value)
-          else
-            row[attribute] = value
-          end
+          row[attribute] = value
+
         end
 
         new_resource = resource.new(row)
